@@ -1,3 +1,8 @@
+body {
+  background-image: url("anton-unsplash.jpg");
+  background-size: cover;
+}
+
 .app {
   display: flex;
   align-items: center;
