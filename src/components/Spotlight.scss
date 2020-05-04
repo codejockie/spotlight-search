@@ -1,12 +1,13 @@
 .spotlight {
+  align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
 .spotlight__searchbar {
   background-color: rgba(230, 231, 232, 0.97);
   border-radius: 0.5rem;
-  // border-radius: 0.5rem 0.5rem 0 0;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
   cursor: default;
@@ -30,8 +31,6 @@
   border-radius: unset;
   border-radius: 0.5rem 0.5rem 0 0 !important;
   box-shadow: unset;
-  // box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
-  //   0 17px 50px 0 rgba(0, 0, 0, 0.19);
   height: 3.5rem;
   position: relative;
   width: 42.5rem;
@@ -44,7 +43,6 @@
   border-radius: 0.5rem;
   color: #333435;
   cursor: default;
-  // display: inline-block;
   font-size: 1.7rem;
   height: 3.5rem;
   padding: 0 0.62rem 0 3.2rem;

@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from "react"
 import { KEY } from "./helpers/keyboard"
 import { AppProvider } from "./AppContext"
 import Spotlight from "./components/Spotlight"
-import SearchResult from "./components/SearchResult"
 import db from "./data.json"
 import "./App.css"
 
@@ -170,7 +169,6 @@ function App() {
         const items = categoryValue.filter((c) =>
           c.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
-
         return acc.concat({ name, items })
       },
       []
@@ -202,10 +200,7 @@ function App() {
   return (
     <AppProvider value={appData}>
       <div className="app">
-        <Spotlight value={inputValue} onChange={handleSearch} />
-        {appData.searchResultsCount > 0 && appData.searchTerm && (
-          <SearchResult onKeyDown={handleKeyDown} />
-        )}
+        <Spotlight value={inputValue} onChange={handleSearch} onKeyDown={handleKeyDown} />
       </div>
     </AppProvider>
   )

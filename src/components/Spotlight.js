@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import cx from "classnames"
 import AppContext from "../AppContext"
+import SearchResult from "./SearchResult"
 import "./Spotlight.scss"
 
 const Spotlight = (props) => {
   const inputRef = useRef()
-  const app = useContext(AppContext)
+  const appContext = useContext(AppContext)
   const [searchBarClass, setSearchBarClass] = useState(
     cx({ spotlight__searchbar: true })
   )
@@ -26,7 +27,7 @@ const Spotlight = (props) => {
       cx({
         spotlight__searchbar: true,
         "spotlight__searchbar-input":
-          app.searchTerm.length !== 0 && app.searchResultsCount !== 0,
+          appContext.searchTerm.length !== 0 && appContext.searchResultsCount !== 0,
       })
     )
 
@@ -34,7 +35,7 @@ const Spotlight = (props) => {
       const width = value.length === 1 ? 1.37 : 1.38
       inputRef.current.style.width = `${value.length * width}rem`
     }
-  }, [app])
+  }, [appContext])
 
   const handleSearch = ({ target: { value } }) => {
     props.onChange(value)
@@ -77,14 +78,17 @@ const Spotlight = (props) => {
           onChange={handleSearch}
         />
         {/* Bar */}
-        {app.searchTerm && (
+        {appContext.searchTerm && (
           <div className="spotlight__searchbar__input-after">
-            &mdash; {app.searchInputInfo}
+            &mdash; {appContext.searchInputInfo}
           </div>
         )}
         {/* Result Icon */}
         <span className="spotlight__searchbar__result_icon"></span>
       </div>
+      {appContext.searchResultsCount > 0 && appContext.searchTerm && (
+        <SearchResult onKeyDown={props.handleKeyDown} />
+      )}
     </div>
   )
 }
