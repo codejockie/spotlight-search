@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
 import $ from "jquery"
+import React, { useCallback, useEffect, useState } from "react"
 import { KEY } from "./helpers/keyboard"
 import { AppProvider } from "./AppContext"
 import Spotlight from "./components/Spotlight"
@@ -8,7 +8,6 @@ import db from "./data.json"
 import "./App.css"
 
 function App() {
-  const listRef = useRef()
   const [inputValue, setInputValue] = useState("")
   const [appData, setAppData] = useState({
     searchInputInfo: undefined,
@@ -115,24 +114,30 @@ function App() {
       "li.search-result__results-list_list-item.active"
     )
     const resultsList = $(".app").find(".search-result__results-list")
-    const activeItemTop = activeItem.position().top
-    const activeItemBottom = activeItem.position().top + activeItem.outerHeight()
-    const parentsHeight = resultsList.height()
-    const currentScrollTop = resultsList.scrollTop()
 
-    if (parentsHeight - activeItemBottom < 0) {
-      resultsList.scrollTop(
-        currentScrollTop + Math.abs(parentsHeight - activeItemBottom)
-      )
-    }
+    if (activeItem.length) {
+      const activeItemTop = activeItem.position().top
+      const activeItemBottom =
+        activeItem.position().top + activeItem.outerHeight()
+      const parentsHeight = resultsList.height()
+      const currentScrollTop = resultsList.scrollTop()
 
-    if (activeItemTop < 0) {
-      let padding = 0
-      if (activeItem.parent().find("li").index(activeItem) === 0) {
-        padding = $(".search-result__results-list__header:first").outerHeight()
+      if (parentsHeight - activeItemBottom < 0) {
+        resultsList.scrollTop(
+          currentScrollTop + Math.abs(parentsHeight - activeItemBottom)
+        )
       }
-      
-      resultsList.scrollTop(currentScrollTop + activeItemTop - padding)
+
+      if (activeItemTop < 0) {
+        let padding = 0
+        if (activeItem.parent().find("li").index(activeItem) === 0) {
+          padding = $(
+            ".search-result__results-list__header:first"
+          ).outerHeight()
+        }
+
+        resultsList.scrollTop(currentScrollTop + activeItemTop - padding)
+      }
     }
   }
 
@@ -160,13 +165,16 @@ function App() {
       return
     }
 
-    const searchResults = Object.entries(db).reduce((acc, currVal) => {
-      const [name, categoryValue] = currVal
-      const items = categoryValue.filter((c) =>
-        c.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-      return acc.concat({ name, items })
-    }, [])
+    const searchResults = Object.entries(db).reduce(
+      (acc, [name, categoryValue]) => {
+        const items = categoryValue.filter((c) =>
+          c.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+
+        return acc.concat({ name, items })
+      },
+      []
+    )
 
     const searchResultsCount = searchResults.reduce((resultsCount, currVal) => {
       return resultsCount + currVal.items.length
@@ -196,7 +204,7 @@ function App() {
       <div className="app">
         <Spotlight value={inputValue} onChange={handleSearch} />
         {appData.searchResultsCount > 0 && appData.searchTerm && (
-          <SearchResult onKeyDown={handleKeyDown} ref={listRef} />
+          <SearchResult onKeyDown={handleKeyDown} />
         )}
       </div>
     </AppProvider>
