@@ -178,6 +178,7 @@ function App() {
       return resultsCount + currVal.items.length
     }, 0)
 
+    const selectedItem = searchResults.length && searchResults[0].items[0]
     const getSearchInputInfo = () => {
       if (searchTerm.length === 0) {
         return undefined
@@ -193,6 +194,7 @@ function App() {
       searchResults,
       searchResultsCount,
       searchTerm,
+      selectedItem,
       selectedItemIndex: 0,
     }))
   }
