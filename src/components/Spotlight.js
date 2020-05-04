@@ -31,7 +31,7 @@ const Spotlight = (props) => {
     )
 
     if (value) {
-      const width = value.length === 1 ? 1.37 : 1
+      const width = value.length === 1 ? 1.37 : 1.38
       inputRef.current.style.width = `${value.length * width}rem`
     }
   }, [app])
@@ -79,7 +79,7 @@ const Spotlight = (props) => {
         {/* Bar */}
         {app.searchTerm && (
           <div className="spotlight__searchbar__input-after">
-            &mdash; {app.searchInputInfo && app.searchInputInfo}
+            &mdash; {app.searchInputInfo}
           </div>
         )}
         {/* Result Icon */}
