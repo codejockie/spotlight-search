@@ -1,9 +1,9 @@
-import React, { forwardRef, useContext } from "react"
+import React, { useContext } from "react"
 import classnames from "classnames"
 import AppContext from "../AppContext"
 import "./SearchResult.scss"
 
-const SearchResult = forwardRef((props, ref) => {
+const SearchResult = (props) => {
   const app = useContext(AppContext)
   const classNames = (active, index) => classnames({
     "search-result__results-list_list-item": true,
@@ -14,12 +14,13 @@ const SearchResult = forwardRef((props, ref) => {
     <div className="search-result">
       {/* Results List */}
       <div className="search-result__results-list" onKeyDown={props.onKeyDown}>
-        <ul ref={ref}>
+        <ul>
           {
+            app.searchResults &&
             app.searchResults.map((searchResult) => (
               <li className="search-result__results-list__category" key={searchResult.name}>
                 <div className="search-result__results-list__header">{searchResult.name}</div>
-                <ul className="search-result__results-list__category__list">
+                <ul>
                   {
                     searchResult.items.map((item, index) => (
                       <li className={classNames(item.active, index)} key={item.name}>
@@ -48,6 +49,6 @@ const SearchResult = forwardRef((props, ref) => {
       </div>
     </div>
   )
-})
+}
 
 export default SearchResult
