@@ -94,8 +94,9 @@ const Spotlight = (props) => {
           )}
         </span>
       </div>
+      {/* Search Results */}
       {appContext.searchResultsCount > 0 && appContext.searchTerm && (
-        <SearchResult onKeyDown={props.handleKeyDown} />
+        <SearchResult onKeyDown={props.onKeyDown} />
       )}
     </div>
   )
