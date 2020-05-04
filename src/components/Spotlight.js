@@ -27,7 +27,8 @@ const Spotlight = (props) => {
       cx({
         spotlight__searchbar: true,
         "spotlight__searchbar-input":
-          appContext.searchTerm.length !== 0 && appContext.searchResultsCount !== 0,
+          appContext.searchTerm.length !== 0 &&
+          appContext.searchResultsCount !== 0,
       })
     )
 
@@ -84,7 +85,14 @@ const Spotlight = (props) => {
           </div>
         )}
         {/* Result Icon */}
-        <span className="spotlight__searchbar__result_icon"></span>
+        <span className="spotlight__searchbar__result_icon">
+          {appContext.selectedItem && (
+            <img
+              alt=""
+              src={`${process.env.PUBLIC_URL}/icons/${appContext.selectedItem.icon}`}
+            />
+          )}
+        </span>
       </div>
       {appContext.searchResultsCount > 0 && appContext.searchTerm && (
         <SearchResult onKeyDown={props.handleKeyDown} />
