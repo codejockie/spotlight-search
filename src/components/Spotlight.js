@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react"
 import cx from "classnames"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import AppContext from "../AppContext"
 import SearchResult from "./SearchResult"
 import "./Spotlight.scss"

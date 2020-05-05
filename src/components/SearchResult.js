@@ -1,15 +1,18 @@
-import React, { useContext } from "react"
 import classnames from "classnames"
+import React, { useContext } from "react"
 import AppContext from "../AppContext"
 import "./SearchResult.scss"
 
 const SearchResult = (props) => {
-  const app = useContext(AppContext)
+  const appContext = useContext(AppContext)
+  const publicPath = process.env.PUBLIC_URL
   const classNames = (active, index) =>
     classnames({
       "search-result__results-list_list-item": true,
       active:
-        app.selectedItemIndex === 0 ? app.selectedItemIndex === index : active,
+        appContext.selectedItemIndex === 0
+          ? appContext.selectedItemIndex === index
+          : active,
     })
 
   return (
@@ -17,45 +20,57 @@ const SearchResult = (props) => {
       {/* Results List */}
       <div className="search-result__results-list" onKeyDown={props.onKeyDown}>
         <ul>
-          {app.searchResults &&
-            app.searchResults.map((searchResult) => (
+          {appContext.searchResults &&
+            appContext.searchResults.map((searchResult) => (
               <li
                 className="search-result__results-list__category"
                 key={searchResult.name}
               >
-                <div className="search-result__results-list__header">
-                  {searchResult.name}
-                </div>
-                <ul>
-                  {searchResult.items.map((item, index) => (
-                    <li
-                      className={classNames(item.active, index)}
-                      key={item.name}
-                    >
-                      <img
-                        className="search-result__results-list_list-item__item-icon"
-                        src={`${process.env.PUBLIC_URL}/icons/${item.icon}`}
-                        alt=""
-                      />
-                      {item.name}
-                    </li>
-                  ))}
-                </ul>
+                {searchResult.items.length > 0 && (
+                  <>
+                    <div className="search-result__results-list__header">
+                      {searchResult.name}
+                    </div>
+                    <ul>
+                      {searchResult.items.map((item, index) => (
+                        <li
+                          className={classNames(item.active, index)}
+                          key={item.name}
+                        >
+                          <img
+                            alt=""
+                            className="search-result__results-list_list-item__item-icon"
+                            src={`${publicPath}/icons/${item.icon}`}
+                          />
+                          {item.name}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </li>
             ))}
-          {/* <li className="search-result__results-list__category">
-            <div className="search-result__results-list__header">Top Hit</div>
-            <ul>
-              <li className={classNames(0)}>
-                <img className="search-result__results-list_list-item__item-icon" src="" alt="" />
-                Docker
-              </li>
-            </ul>
-          </li> */}
         </ul>
       </div>
+
       {/* Results Details */}
-      <div className="search-result__results-detail"></div>
+      <div className="search-result__results-detail">
+        {appContext.selectedItem && (
+          <>
+            <div className="search-result__results-detail__container">
+              <img
+                alt=""
+                className="search-result__results-detail__icon"
+                src={`${publicPath}/icons/${appContext.selectedItem.icon}`}
+              />
+              <div className="search-result__results-detail__name">
+                {appContext.selectedItem.name}
+              </div>
+            </div>
+            <div className="search-result__results-detail__item-details"></div>
+          </>
+        )}
+      </div>
     </div>
   )
 }
