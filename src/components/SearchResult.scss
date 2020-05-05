@@ -11,6 +11,7 @@ $listFontSize: 0.75rem;
   display: flex;
   height: 23.5rem;
   min-height: 23.5rem;
+  user-select: none;
   width: 42.5rem;
 }
 
@@ -21,7 +22,6 @@ $listFontSize: 0.75rem;
   overflow: hidden;
   overflow-y: auto;
   position: relative; // Ensures jQuery handles scroll correctly
-  user-select: none;
   width: 18rem;
 }
 
