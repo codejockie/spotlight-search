@@ -1,10 +1,10 @@
 import $ from "jquery"
 import React, { useCallback, useEffect, useState } from "react"
 import db from "./data.json"
-import ToggleTheme from "./components/ToggleTheme"
 import { KEY } from "./helpers/keyboard"
 import { AppProvider } from "./AppContext"
 import Spotlight from "./components/Spotlight"
+import ToggleTheme from "./components/ToggleTheme"
 import ThemeProvider from "./components/ThemeProvider"
 import "./App.css"
 
