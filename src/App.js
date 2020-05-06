@@ -1,9 +1,11 @@
 import $ from "jquery"
 import React, { useCallback, useEffect, useState } from "react"
+import db from "./data.json"
+import ToggleTheme from "./components/ToggleTheme"
 import { KEY } from "./helpers/keyboard"
 import { AppProvider } from "./AppContext"
 import Spotlight from "./components/Spotlight"
-import db from "./data.json"
+import ThemeProvider from "./components/ThemeProvider"
 import "./App.css"
 
 function App() {
@@ -200,11 +202,20 @@ function App() {
   }
 
   return (
-    <AppProvider value={appData}>
-      <div className="app">
-        <Spotlight value={inputValue} onChange={handleSearch} onKeyDown={handleKeyDown} />
-      </div>
-    </AppProvider>
+    <ThemeProvider>
+      <AppProvider value={appData}>
+        <>
+          <ToggleTheme />
+          <div className="app">
+            <Spotlight
+              value={inputValue}
+              onChange={handleSearch}
+              onKeyDown={handleKeyDown}
+            />
+          </div>
+        </>
+      </AppProvider>
+    </ThemeProvider>
   )
 }
 
