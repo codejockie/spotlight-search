@@ -1,3 +1,28 @@
+:root {
+  --bg-color: #E4E7E9;
+  --border-color: #CCCECF;
+  --fill-color: #635D5C;
+  --font-color: #424242;
+  --heading-color: #292922;
+  --input-color: #333435;
+  --text-color: #606162;
+  --primary-color: #333435;
+  --secondary-color: #DCDDDF;
+}
+
+[data-theme="dark"] {
+  /* Dark colors: #2C2C2E; #3C3D3F; */
+  --bg-color: #3A3A3C;
+  --border-color: #515253;
+  --fill-color: #A6A6A6;
+  --font-color: #E1E1FF;
+  --heading-color: #818cab;
+  --input-color: #FFF;
+  --text-color: #A6A6A6;
+  --primary-color: #FFF;
+  --secondary-color: #484645;
+}
+
 body {
   background-image: url("anton-unsplash.jpg");
   background-size: cover;
