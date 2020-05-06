@@ -6,7 +6,7 @@
 }
 
 .spotlight__searchbar {
-  background-color: rgba(230, 231, 232, 0.97);
+  background-color: var(--bg-color);
   border-radius: 0.5rem;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
@@ -17,17 +17,17 @@
 }
 
 .spotlight__searchbar__icon {
-  fill: #757575;
+  fill: var(--fill-color);
   height: 1.5rem;
   left: 1.2rem;
   padding-right: 0.62rem;
   position: absolute;
-  top: 1.2rem;
+  top: 1rem;
   width: 1.5rem;
 }
 
 .spotlight__searchbar-input {
-  background-color: rgba(230, 231, 232, 0.97);
+  background-color: var(--bg-color);
   border-radius: unset;
   border-radius: 0.5rem 0.5rem 0 0 !important;
   box-shadow: unset;
@@ -41,11 +41,12 @@
   background-color: transparent;
   border: none;
   border-radius: 0.5rem;
-  color: #333435;
+  color: var(--primary-color);
   cursor: default;
   font-size: 1.7rem;
   height: 3.5rem;
-  padding: 0 0.62rem 0 3.2rem;
+  max-width: 25rem;
+  padding: 0 0.2rem 0 3.2rem;
 }
 
 .spotlight__searchbar__search.empty {
@@ -57,10 +58,15 @@
 }
 
 .spotlight__searchbar__input-after {
-  color: #606162;
+  color: var(--text-color);
   display: inline-block;
-  height: 3.5rem;
-  line-height: 3.5rem;
+
+  & span {
+    position: absolute;
+    height: 1.5rem;
+    top: 1.25rem;
+    width: 15rem;
+  }
 }
 
 .spotlight__searchbar__result_icon {
