@@ -74,10 +74,12 @@ const Spotlight = (props) => {
         <input
           autoFocus
           className={classNames}
+          id="spotlight-search-bar"
           placeholder="Spotlight Search"
           ref={inputRef}
           onChange={handleSearch}
         />
+        <label className="visuallyhidden" htmlFor="spotlight-search-bar">Spotlight Search</label>
         {/* Bar */}
         {appContext.searchTerm && (
           <div className="spotlight__searchbar__input-after">

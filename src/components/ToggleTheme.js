@@ -29,12 +29,18 @@ const ToggleTheme = () => {
   }
 
   return (
-    <span className="toggle">
+    <div className="toggle">
       <label className="switch">
-        <input type="checkbox" onChange={toggleTheme} ref={toggleRef} />
+        <input
+          type="checkbox"
+          id="theme-toggle"
+          onChange={toggleTheme}
+          ref={toggleRef}
+        />
         <span className="slider round"></span>
       </label>
-    </span>
+      <label className="visuallyhidden" htmlFor="theme-toggle">Theme Toggle</label>
+    </div>
   )
 }
 
