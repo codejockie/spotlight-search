@@ -29,9 +29,7 @@ function App() {
       let currentItemIndex = 0
       const searchResults = [...appData.searchResults]
       const getSearchInputInfo = (name) => {
-        if (appData.searchTerm.length === 0) {
-          return undefined
-        } else if (appData.searchResultsCount === 0) {
+        if (appData.searchResultsCount === 0) {
           return "No Results"
         }
         return name
@@ -160,21 +158,36 @@ function App() {
         searchResults: [],
         searchTerm: "",
         selectedCategory: undefined,
-        selectedItemIndex: undefined,
         selectedItem: undefined,
+        selectedItemIndex: undefined,
       })
       return
     }
 
-    const searchResults = Object.entries(db).reduce(
-      (acc, [name, categoryValue]) => {
+    const searchResults = Object.entries(db)
+      .reduce((acc, [name, categoryValue]) => {
         const items = categoryValue.filter((c) =>
           c.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
         return acc.concat({ name, items })
-      },
-      []
-    )
+      }, [])
+      // Sort
+      .map((category) => {
+        category.items.sort((a, b) => {
+          const searchKey = searchTerm.toLowerCase()
+          const aStartsWith = a.name.toLowerCase().startsWith(searchKey)
+          const bStartsWith = b.name.toLowerCase().startsWith(searchKey)
+
+          if (aStartsWith && !bStartsWith) {
+            return -1
+          }
+          if (!aStartsWith && bStartsWith) {
+            return 1
+          }
+          return 0
+        })
+        return category
+      })
 
     const searchResultsCount = searchResults.reduce((resultsCount, currVal) => {
       return resultsCount + currVal.items.length
@@ -182,9 +195,7 @@ function App() {
 
     const selectedItem = searchResults.length && searchResults[0].items[0]
     const getSearchInputInfo = () => {
-      if (searchTerm.length === 0) {
-        return undefined
-      } else if (searchResultsCount === 0) {
+      if (searchResultsCount === 0) {
         return "No Results"
       }
       return searchResults[0].items[0].name
