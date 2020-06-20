@@ -2,29 +2,24 @@ import React, { useContext, useEffect, useRef } from "react"
 import { DARK, LIGHT } from "../constants"
 import { ThemeContext } from "../ThemeContext"
 
-import "./ToggleTheme.scss"
+import "./ThemeToggle.scss"
 
-const ToggleTheme = () => {
+const ThemeToggle = () => {
   const toggleRef = useRef()
   const themeContext = useContext(ThemeContext)
 
   useEffect(() => {
-    const currentTheme = localStorage.getItem("theme")
+    const theme = localStorage.getItem("theme")
 
-    if (currentTheme && currentTheme === DARK) {
-      document.documentElement.setAttribute("data-theme", currentTheme)
+    if (theme === DARK) {
+      document.documentElement.setAttribute("data-theme", theme)
       toggleRef.current.checked = true
     }
   }, [])
 
-  const toggleTheme = (event) => {
-    if (event.target.checked) {
-      localStorage.setItem("theme", DARK)
-      document.documentElement.setAttribute("data-theme", DARK)
-    } else {
-      localStorage.setItem("theme", LIGHT)
-      document.documentElement.setAttribute("data-theme", LIGHT)
-    }
+  const toggleTheme = ({ target: { checked } }) => {
+    localStorage.setItem("theme", checked ? DARK : LIGHT)
+    document.documentElement.setAttribute("data-theme", checked ? DARK : LIGHT)
     themeContext.setTheme(themeContext.theme.type)
   }
 
@@ -44,4 +39,4 @@ const ToggleTheme = () => {
   )
 }
 
-export default ToggleTheme
+export default ThemeToggle
