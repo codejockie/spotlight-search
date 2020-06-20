@@ -1,10 +1,11 @@
 import $ from "jquery"
 import React, { useCallback, useEffect, useState } from "react"
 import db from "./data.json"
+import { sleep } from "./helpers/sleep"
 import { KEY } from "./helpers/keyboard"
 import { AppProvider } from "./AppContext"
 import Spotlight from "./components/Spotlight"
-import ToggleTheme from "./components/ToggleTheme"
+import ThemeToggle from "./components/ThemeToggle"
 import ThemeProvider from "./components/ThemeProvider"
 import "./App.css"
 
@@ -201,22 +202,24 @@ function App() {
       return searchResults[0].items[0].name
     }
 
-    setAppData((prevAppData) => ({
-      ...prevAppData,
-      searchInputInfo: getSearchInputInfo(),
-      searchResults,
-      searchResultsCount,
-      searchTerm,
-      selectedItem,
-      selectedItemIndex: 0,
-    }))
+    sleep(600).then(() => {
+      setAppData((prevAppData) => ({
+        ...prevAppData,
+        searchInputInfo: getSearchInputInfo(),
+        searchResults,
+        searchResultsCount,
+        searchTerm,
+        selectedItem,
+        selectedItemIndex: 0,
+      }))
+    })
   }
 
   return (
     <ThemeProvider>
       <AppProvider value={appData}>
         <>
-          <ToggleTheme />
+          <ThemeToggle />
           <div className="app">
             <Spotlight
               value={inputValue}
