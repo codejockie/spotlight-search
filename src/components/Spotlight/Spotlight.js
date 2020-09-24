@@ -1,7 +1,7 @@
 import cx from "classnames"
 import React, { useContext, useEffect, useRef, useState } from "react"
-import AppContext from "../AppContext"
-import SearchResult from "./SearchResult"
+import AppContext from "../../Contexts/AppContext"
+import SearchResult from "../SearchResult/SearchResult"
 import "./Spotlight.scss"
 
 const Spotlight = (props) => {

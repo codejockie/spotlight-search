@@ -1,10 +1,10 @@
 import React from "react"
-import { LIGHT } from "./constants"
+import { LIGHT } from "../constants"
 
 export const ThemeContext = React.createContext({
   theme: {
-    primary: "#00bfa5",
-    text: "#black",
+    primary: "#0277bd",
+    text: "light",
     type: LIGHT,
   },
   setTheme: () => {},

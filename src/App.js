@@ -3,10 +3,10 @@ import React, { useCallback, useEffect, useState } from "react"
 import db from "./data.json"
 import { sleep } from "./helpers/sleep"
 import { KEY } from "./helpers/keyboard"
-import { AppProvider } from "./AppContext"
-import Spotlight from "./components/Spotlight"
-import ThemeToggle from "./components/ThemeToggle"
-import ThemeProvider from "./components/ThemeProvider"
+import { AppProvider } from "./Contexts/AppContext"
+import ThemeProvider from "./Providers/ThemeProvider"
+import Spotlight from "./components/Spotlight/Spotlight"
+import ThemeToggle from "./components/ThemeToggle/ThemeToggle"
 import "./App.css"
 
 function App() {
@@ -217,17 +217,15 @@ function App() {
 
   return (
     <ThemeProvider>
+      <ThemeToggle />
       <AppProvider value={appData}>
-        <>
-          <ThemeToggle />
-          <div className="app">
-            <Spotlight
-              value={inputValue}
-              onChange={handleSearch}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
-        </>
+        <div className="app">
+          <Spotlight
+            value={inputValue}
+            onChange={handleSearch}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
       </AppProvider>
     </ThemeProvider>
   )

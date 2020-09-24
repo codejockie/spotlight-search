@@ -1,6 +1,6 @@
 import classnames from "classnames"
 import React, { useContext } from "react"
-import AppContext from "../AppContext"
+import AppContext from "../../Contexts/AppContext"
 import "./SearchResult.scss"
 
 const SearchResult = (props) => {

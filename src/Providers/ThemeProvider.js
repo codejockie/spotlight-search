@@ -1,23 +1,26 @@
 import React, { useState } from "react"
 import { DARK, LIGHT } from "../constants"
-import { ThemeContext } from "../ThemeContext"
+import { ThemeContext } from "../Contexts/ThemeContext"
 
 const ThemeProvider = (props) => {
   const theme = {
     dark: {
       primary: "#212121",
-      text: "white",
+      text: "dark",
       type: DARK,
     },
     light: {
       primary: "#0277bd",
-      text: "black",
+      text: "light",
       type: LIGHT,
     },
   }
 
   const setTheme = (type) => {
-    setState({ ...state, theme: type === DARK ? theme.light : theme.dark })
+    setState((prevState) => ({
+      ...prevState,
+      theme: type === DARK ? theme.dark : theme.light,
+    }))
   }
 
   const initialState = {

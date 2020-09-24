@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react"
-import { DARK, LIGHT } from "../constants"
-import { ThemeContext } from "../ThemeContext"
+import { DARK, LIGHT } from "../../constants"
+import { ThemeContext } from "../../Contexts/ThemeContext"
 
 import "./ThemeToggle.scss"
 
@@ -12,15 +12,16 @@ const ThemeToggle = () => {
     const theme = localStorage.getItem("theme")
 
     if (theme === DARK) {
-      document.documentElement.setAttribute("data-theme", theme)
       toggleRef.current.checked = true
+      document.documentElement.setAttribute("data-theme", theme)
     }
   }, [])
 
   const toggleTheme = ({ target: { checked } }) => {
-    localStorage.setItem("theme", checked ? DARK : LIGHT)
-    document.documentElement.setAttribute("data-theme", checked ? DARK : LIGHT)
-    themeContext.setTheme(themeContext.theme.type)
+    const theme = checked ? DARK : LIGHT
+    themeContext.setTheme(theme)
+    localStorage.setItem("theme", theme)
+    document.documentElement.setAttribute("data-theme", theme)
   }
 
   return (
