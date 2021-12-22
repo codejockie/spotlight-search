@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { DARK, LIGHT } from "../constants"
-import { ThemeContext } from "../Contexts/ThemeContext"
+import { ThemeContext } from "../contexts/ThemeContext"
 
 const ThemeProvider = (props) => {
   const theme = {
