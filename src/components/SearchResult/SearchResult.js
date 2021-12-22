@@ -1,13 +1,13 @@
-import classnames from "classnames"
+import cx from "classnames"
 import React, { useContext } from "react"
-import AppContext from "../../Contexts/AppContext"
+import { AppContext } from "../../contexts/AppContext"
 import "./SearchResult.scss"
 
 const SearchResult = (props) => {
   const appContext = useContext(AppContext)
   const publicPath = process.env.PUBLIC_URL
   const classNames = (active, index) =>
-    classnames({
+  cx({
       "search-result__results-list_list-item": true,
       active:
         appContext.selectedItemIndex === 0

@@ -1,28 +1,16 @@
-import React, { useContext, useEffect, useRef } from "react"
-import { DARK, LIGHT } from "../../constants"
-import { ThemeContext } from "../../Contexts/ThemeContext"
+import React, { useEffect, useRef } from "react"
+import { DARK } from "../../constants"
+import { useThemeMode } from "../../lib/hooks/use-theme-mode"
 
 import "./ThemeToggle.scss"
 
 const ThemeToggle = () => {
   const toggleRef = useRef()
-  const themeContext = useContext(ThemeContext)
+  const [theme, toggleTheme] = useThemeMode()
 
   useEffect(() => {
-    const theme = localStorage.getItem("theme")
-
-    if (theme === DARK) {
-      toggleRef.current.checked = true
-      document.documentElement.setAttribute("data-theme", theme)
-    }
-  }, [])
-
-  const toggleTheme = ({ target: { checked } }) => {
-    const theme = checked ? DARK : LIGHT
-    themeContext.setTheme(theme)
-    localStorage.setItem("theme", theme)
-    document.documentElement.setAttribute("data-theme", theme)
-  }
+    toggleRef.current.checked = theme === DARK ? true : false
+  }, [theme])
 
   return (
     <div className="toggle">

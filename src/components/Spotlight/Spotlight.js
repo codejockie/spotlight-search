@@ -1,31 +1,27 @@
 import cx from "classnames"
 import React, { useContext, useEffect, useRef, useState } from "react"
-import AppContext from "../../Contexts/AppContext"
+import { AppContext } from "../../contexts/AppContext"
 import SearchResult from "../SearchResult/SearchResult"
 import "./Spotlight.scss"
 
 const Spotlight = (props) => {
   const inputRef = useRef()
   const appContext = useContext(AppContext)
-  const [searchBarClass, setSearchBarClass] = useState(
-    cx({ spotlight__searchbar: true })
-  )
-  const [classNames, setClassNames] = useState(
-    cx({ spotlight__searchbar__search: true, empty: props.value.length === 0 })
+  const [className, setClassName] = useState(cx({ spotlight__searchbar: true }))
+  const [inputClassName, setInputClassName] = useState(
+    cx("spotlight__searchbar__search", { empty: props.value.length === 0 })
   )
 
   useEffect(() => {
     const { value } = inputRef.current
-    setClassNames(
-      cx({
-        spotlight__searchbar__search: true,
+    setInputClassName(
+      cx("spotlight__searchbar__search", {
         empty: value.length === 0,
       })
     )
 
-    setSearchBarClass(
-      cx({
-        spotlight__searchbar: true,
+    setClassName(
+      cx("spotlight__searchbar", {
         "spotlight__searchbar-input":
           appContext.searchTerm.length !== 0 &&
           appContext.searchResultsCount !== 0,
@@ -48,7 +44,7 @@ const Spotlight = (props) => {
 
   return (
     <div className="spotlight" onClick={handleClick}>
-      <div className={searchBarClass}>
+      <div className={className}>
         {/* Search Icon */}
         <svg
           version="1.1"
@@ -59,8 +55,7 @@ const Spotlight = (props) => {
           viewBox="0 0 283.753 284.51"
           enableBackground="new 0 0 283.753 284.51"
           xmlSpace="preserve"
-          className="spotlight__searchbar__icon"
-        >
+          className="spotlight__searchbar__icon">
           <path
             d="M281.394,264.378l0.135-0.135L176.24,158.954c30.127-38.643,27.45-94.566-8.09-130.104
           c-38.467-38.467-100.833-38.467-139.3,0c-38.467,38.467-38.466,100.833,0,139.299c35.279,35.279,90.644,38.179,129.254,8.748
@@ -73,19 +68,19 @@ const Spotlight = (props) => {
         {/* Search Input */}
         <input
           autoFocus
-          className={classNames}
+          className={inputClassName}
           id="spotlight-search-bar"
           placeholder="Spotlight Search"
           ref={inputRef}
           onChange={handleSearch}
         />
-        <label className="visuallyhidden" htmlFor="spotlight-search-bar">Spotlight Search</label>
+        <label className="visuallyhidden" htmlFor="spotlight-search-bar">
+          Spotlight Search
+        </label>
         {/* Bar */}
         {appContext.searchTerm && (
           <div className="spotlight__searchbar__input-after">
-            <span>
-              &mdash; {appContext.searchInputInfo}
-            </span>
+            <span>&mdash; {appContext.searchInputInfo}</span>
           </div>
         )}
         {/* Result Icon */}
